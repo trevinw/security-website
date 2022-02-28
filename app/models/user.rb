@@ -1,3 +1,3 @@
 class User < ApplicationRecord
-  devise :ldap_authenticatable, :rememberable
+  devise :ldap_authenticatable
 end

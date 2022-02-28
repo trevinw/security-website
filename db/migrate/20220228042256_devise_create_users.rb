@@ -11,9 +11,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.string :department
       t.string :email
 
-      # Rememberable
-      t.datetime :remember_created_at
-
       t.timestamps null: false
     end
 

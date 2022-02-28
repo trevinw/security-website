@@ -19,7 +19,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_28_042256) do
     t.string "job_title"
     t.string "department"
     t.string "email"
-    t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["username"], name: "index_users_on_username", unique: true
