@@ -1,0 +1,24 @@
+<h2>Log in</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false }) do |f| %>
+  <div class="form-floating mb-3 w-25">
+    <%= f.text_field :username, autofocus: true, autocomplete: 'username', class: 'form-control', placeholder: 'NT_World Username' %>
+    <%= f.label :username, "NT_World Username" %>
+  </div>
+
+  <div class="form-floating mb-3 w-25">
+    <%= f.password_field :password, autocomplete: 'current-password', class: 'form-control', placeholder: 'Password' %>
+    <%= f.label :password, 'Password' %>
+  </div>
+
+    <% if devise_mapping.rememberable? %>
+    <div class="form-check">
+      <%= f.check_box :remember_me, class: 'form-check-input', checked: true %>
+      <%= f.label :remember_me, class: 'form-check-label' %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.submit "Log in", class: 'btn btn-success' %>
+  </div>
+<% end %>
