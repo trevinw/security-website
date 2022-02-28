@@ -55,6 +55,15 @@ gem 'bootsnap', require: false
 gem 'devise'
 gem 'devise_ldap_authenticatable', git: 'https://github.com/trevinw/devise_ldap_authenticatable'
 
+# Load .env variables
+gem 'dotenv-rails'
+
+# Access S2 Netbox API
+gem 's2_netbox'
+
+# Check for a connection by pinging
+gem 'net-ping', '~> 2.0', '>= 2.0.8'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
