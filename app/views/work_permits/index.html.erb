@@ -1,0 +1,29 @@
+<% content_for(:html_title) {html_title(params[:company_id], @company_name)} %>
+
+<ul class="nav nav-pills">
+  <% @companies.each do |company| %>
+    <% unless company.work_permits.empty? %>
+      <li class="nav-item">
+        <%= link_to(company.name, work_permits_path(company_id: company.id), { class: "nav-link #{active_css(@active_company_id, company.id)}" }) %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<%= turbo_stream_from('work_permits') %>
+<%= turbo_frame_tag('work_permits') do %>
+  <%= render(@work_permits) %>
+<% end %>
+
+<div class="position-fixed" style="bottom: 30px;right:20px;">
+  <%= link_to new_company_path, { class: 'btn btn-success btn-lg rounded-pill shadow-lg', 'data-action': 'click->modal#show', 'data-turbo-frame': 'modal-body' } do %>
+    <i class="bi bi-plus-lg"></i>
+    <i class="bi bi-building"></i>
+  <% end %>
+
+  <%= link_to new_work_permit_path, { class: 'btn btn-success btn-lg rounded-pill shadow-lg', 'data-action': 'click->modal#show', 'data-turbo-frame': 'modal-body' } do %>
+    <i class="bi bi-plus-lg"></i>
+    <i class="bi bi-file-text"></i>
+  <% end %>
+</div>
+

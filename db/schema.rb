@@ -10,7 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_28_042256) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_28_083802) do
+  create_table "buildings", force: :cascade do |t|
+    t.integer "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "buildings_work_permits", force: :cascade do |t|
+    t.integer "building_id"
+    t.integer "work_permit_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["building_id"], name: "index_buildings_work_permits_on_building_id"
+    t.index ["work_permit_id"], name: "index_buildings_work_permits_on_work_permit_id"
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hazards", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hazards_work_permits", force: :cascade do |t|
+    t.integer "hazard_id"
+    t.integer "work_permit_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hazard_id"], name: "index_hazards_work_permits_on_hazard_id"
+    t.index ["work_permit_id"], name: "index_hazards_work_permits_on_work_permit_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username", default: "", null: false
     t.string "first_name"
@@ -19,9 +55,29 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_28_042256) do
     t.string "job_title"
     t.string "department"
     t.string "email"
+    t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  create_table "work_permits", force: :cascade do |t|
+    t.integer "number"
+    t.string "status"
+    t.string "work_location"
+    t.text "work_description"
+    t.text "notes"
+    t.date "start_date"
+    t.date "end_date"
+    t.string "category"
+    t.boolean "needs_bypass"
+    t.string "seh_representative"
+    t.string "alternative_contact"
+    t.integer "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_work_permits_on_company_id"
+  end
+
+  add_foreign_key "work_permits", "companies"
 end

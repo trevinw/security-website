@@ -1,0 +1,26 @@
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">
+    <%= buildings_html(work_permit.buildings) %>
+  </li>
+
+  <li class="list-group-item">
+    <b>Building Bypass?: </b>
+    <% if work_permit.needs_bypass? %>
+      <i class="bi bi-check-lg"></i>
+    <% else %>
+      <i class="bi bi-x-lg"></i>
+    <% end %>
+  </li>
+
+  <li class="list-group-item">
+    <b>Work Location: </b><%= work_permit.work_location %>
+  </li>
+
+  <li class="list-group-item">
+    <b>Work Description: </b><%= work_permit.work_description %>
+  </li>  
+
+  <% if work_permit.notes && !work_permit.notes.empty? %>
+    <li class="list-group-item"><b>Notes: </b><%= work_permit.notes %></li>
+  <% end %>
+</ul>

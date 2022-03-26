@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: 1
+  status: MyString
+  work_location: MyString
+  work_description: MyText
+  notes: MyText
+  start_date: 2022-02-28
+  end_date: 2022-02-28
+  category: MyString
+  needs_bypass: false
+  seh_representative: MyString
+  alternative_contact: MyString
+
+two:
+  number: 1
+  status: MyString
+  work_location: MyString
+  work_description: MyText
+  notes: MyText
+  start_date: 2022-02-28
+  end_date: 2022-02-28
+  category: MyString
+  needs_bypass: false
+  seh_representative: MyString
+  alternative_contact: MyString

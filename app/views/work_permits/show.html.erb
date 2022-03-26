@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @work_permit %>
+
+<div>
+  <%= link_to "Edit this work permit", edit_work_permit_path(@work_permit) %> |
+  <%= link_to "Back to work permits", work_permits_path %>
+
+  <%= button_to "Destroy this work permit", @work_permit, method: :delete %>
+</div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SecurityWebsite</title>
+    <title><%= content_for?(:html_title) ? "Security | #{yield(:html_title)}" : 'Security' %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,10 +10,27 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+  <body class="container-fluid p-3" data-controller="modal toast">
+    <%= render '/shared/modal' %>
+    <%= render '/shared/toast' %>
 
-    <%= yield %>
+    <div class="row">
+      <div class="col-2">
+        <div class="sticky-top">
+          <%= render '/shared/sidebar' %>
+        </div>
+      </div>
+
+      <div class="col-10">
+        <% if notice %>
+          <p class="notice"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p class="alert"><%= alert %></p>
+        <% end %>
+
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>

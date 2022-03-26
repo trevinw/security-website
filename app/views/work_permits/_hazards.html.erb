@@ -1,0 +1,11 @@
+<ul class="list-group list-group-flush">
+  <% if work_permit.hazard_names.empty? %>
+    <li class="list-group-item">
+      No hazards
+    </li>
+  <% else %>
+    <% work_permit.hazard_names.each do |hazard_name| %>
+      <li class="list-group-item"><%= hazard_name %></li>
+    <% end %>
+  <% end %>
+</ul>

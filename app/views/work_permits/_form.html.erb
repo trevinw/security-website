@@ -1,0 +1,158 @@
+<div class="card my-2" data-controller="form" data-form-target="form">
+  <div class="card-body">
+    <% if work_permit.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(work_permit.errors.count, "error") %> stopped this work permit from being saved:</h2>
+
+        <ul>
+          <% work_permit.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form_with(model: work_permit, class: 'text-center') do |form| %>
+      <div class="container px-0">
+        <div class="row">
+          <div class="col">
+            <div class="row mb-3">
+              <div class="col-2">
+                <div class="form-floating">
+                  <%= form.number_field(:number, { class: 'form-control', placeholder: 'Number', required: true, min: 1, step: 1 }) %>
+                  <%= form.label(:number) %>
+                </div>
+              </div>
+
+              <div class="col-3">
+                <div class="form-floating">
+                  <%= form.collection_select(:company_id, companies, :id, :name, {}, { class: 'form-select', placeholder: 'Company', required: true }) %>
+                  <%= form.label(:company)%>
+                </div>
+              </div>
+
+              <div class="col-2">
+                <div class="form-floating">
+                  <%= form.select(:category, ['Regular', 'Hazardous'], {}, { class: 'form-select', placeholder: 'Category', required: true }) %>
+                  <%= form.label(:category) %>
+                </div>
+              </div>
+
+              <div class="col-2">
+                <div class="form-floating">
+                  <%= form.select(:needs_bypass, [['Yes', true], ['No', false]], {}, { class: 'form-select', required: true }) %>
+                  <%= form.label(:needs_bypass, 'Bypass?') %>
+                </div>
+              </div>
+              
+              <div class="col-3">
+                <div class="form-floating">
+                  <%= form.select(:status, ['Returned', 'Out', 'Out/Disabled', 'Missing', 'Expired'], {}, { class: 'form-select', required: true, selected: 'Returned' }) %>
+                  <%= form.label(:status) %>
+                </div>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="row mb-3">
+              <div class="col-5">
+                <div class="form-floating">
+                  <h2>Buildings</h2>
+                  <%= collection_check_boxes(:work_permit, :building_ids, buildings, :id, :number) do |b| %>
+                    <div class="form-check-inline">
+                      <%= b.check_box({ class: 'btn-check' }) %>
+                      <%= b.label({ class: 'btn btn-outline-secondary my-1' }) %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="col-7">
+                <div class="form-floating">
+                  <h2>Hazards</h2>
+                  <%= collection_check_boxes(:work_permit, :hazard_ids, hazards, :id, :name) do |b| %>
+                    <div class="form-check-inline">
+                      <%= b.check_box({ class: 'btn-check'}) %>
+                      <%= b.label({ class: 'btn btn-sm btn-outline-danger my-1' }) %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="row mb-3">
+              <div class="col-3">
+                <div class="form-floating">
+                  <%= form.text_field(:seh_representative, { class: 'form-control', placeholder: 'SEH Representative', required: true }) %>
+                  <%= form.label(:seh_representative, 'SEH Representative') %>
+                </div>
+              </div>
+
+              <div class="col-3">
+                <div class="form-floating">
+                  <%= form.text_field(:alternative_contact, { class: 'form-control', placeholder: 'Alternative Contact', required: true }) %>
+                  <%= form.label(:alternative_contact, 'Alternative Contact') %>
+                </div>
+              </div>
+
+              <div class="col-3">
+                <div class="form-floating">
+                  <%= form.date_field(:start_date, { class: 'form-control', placeholder: 'Start Date', required: true }) %>
+                  <%= form.label(:start_date, 'Start Date') %>
+                </div>
+              </div>
+
+              <div class="col-3">
+                <div class="form-floating">
+                  <%= form.date_field(:end_date, { class: 'form-control', placeholder: 'End Date', required: true }) %>
+                  <%= form.label(:end_date, 'End Date') %>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-5">
+                <div class="form-floating">
+                  <%= form.text_field(:work_location, { class: 'form-control', placeholder: 'Work Location', required: true }) %>
+                  <%= form.label(:work_location, 'Work Location') %>
+                </div>
+              </div>
+
+              <div class="col-7">
+                <div class="form-floating">
+                  <%= form.text_area(
+                    :work_description,
+                    {
+                      class: 'form-control',
+                      placeholder: 'Work Description',
+                      oninput: 'this.style.height = "";this.style.height = this.scrollHeight + "px"',
+                      onclick: 'this.style.height = "";this.style.height = this.scrollHeight + "px"',
+                      required: true
+                    }
+                  ) %>
+                  <%= form.label(:work_description, 'Work Description') %>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <button class="btn btn-secondary" data-action="modal#hide">Cancel</button>
+              </div>
+              <div class="col">
+                <% if work_permit.new_record? %>
+                  <%= form.submit({ class: 'btn btn-success', 'data-action': 'toast#show', 'data-toast-message-param': 'Work Permit created successfully' }) %>
+                <% else %>
+                  <%= form.submit({ class: 'btn btn-success', 'data-action': 'toast#show', 'data-toast-message-param': "#{work_permit.company.name} Permit ##{work_permit.number} updated successfully" }) %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

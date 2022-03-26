@@ -1,0 +1,95 @@
+<%= turbo_frame_tag work_permit do %>
+  <div class="card my-2 border border-3 <%= border_style(work_permit.category) %>">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs" role="tablist">
+        <li class="nav-item">
+          <p class="nav-link disabled"><b><%= "##{work_permit.number}" %></b></p>
+        </li>
+
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="<%= dom_id(work_permit) %>-work-details-tab" data-bs-toggle="tab" data-bs-target="#<%= dom_id(work_permit) %>-work-details" type="button" role="tab">Work Details</button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="<%= dom_id(work_permit) %>-hazards-tab" data-bs-toggle="tab" data-bs-target="#<%= dom_id(work_permit) %>-hazards" type="button" role="tab">Hazards</button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="<%= dom_id(work_permit) %>-contact-info-tab" data-bs-toggle="tab" data-bs-target="#<%= dom_id(work_permit) %>-contact-info" type="button" role="tab">Contact Info</button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="<%= dom_id(work_permit) %>-dates-tab" data-bs-toggle="tab" data-bs-target="#<%= dom_id(work_permit) %>-dates" type="button" role="tab">Dates</button>
+        </li>
+
+        <li class="nav-item mx-1">
+          <%= link_to(edit_work_permit_path(work_permit), { class: 'btn btn-info', title: 'Edit', 'data-action': 'click->modal#show', 'data-turbo-frame': 'modal-body' }) do %>
+            <i class="bi bi-pencil"></i>
+          <% end %>
+        </li>
+
+        <li class="nav-item mx-1">
+          <%= link_to work_permit_path(work_permit), { data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, title: 'Delete', class: 'btn btn-danger' } do %>
+            <i class="bi bi-trash3"></i>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card-body">
+      <div class="row align-items-center">
+        <div class="col-3">
+          <% if work_permit.expired? %>
+            <p class="text-center text-danger fw-bold mb-0">Work Permit expired on <%= work_permit.formatted_end_date %></p>
+          <% end %>
+
+          <%= form_with(
+            model: work_permit,
+            class: "rounded my-2 p-2 #{status_background_color(work_permit.status)}"
+          ) do |form| %>
+            <div class="form-floating">
+              <%= form.select(:status,
+                              %w[Returned Out Out/Disabled Missing Expired],
+                              {},
+                              {
+                                class: 'form-select',
+                                placeholder: 'Status',
+                                onchange: "this.form.requestSubmit()"
+                                # https://stackoverflow.com/a/69537709/14768757
+                              }
+                  )
+              %>
+              <%= form.label(:status) %>
+            </div>
+          <% end %>
+
+          <% unless work_permit.status == 'Returned' %>
+            <div class="text-center mb-0">
+              <%= simple_format status_message(work_permit) %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="col-9">
+          <div class="tab-content">
+            <div class="tab-pane active" id="<%= dom_id(work_permit) %>-work-details" role="tabpanel">
+              <%= render 'work_permits/work_details', work_permit: work_permit %>
+            </div>
+
+            <div class="tab-pane" id="<%= dom_id(work_permit) %>-hazards" role="tabpanel">
+              <%= render 'work_permits/hazards', work_permit: work_permit %>
+            </div>
+
+            <div class="tab-pane" id="<%= dom_id(work_permit) %>-contact-info" role="tabpanel">
+              <%= render 'work_permits/contact_info', work_permit: work_permit %>
+            </div>
+
+            <div class="tab-pane" id="<%= dom_id(work_permit) %>-dates" role="tabpanel">
+              <%= render 'work_permits/dates', work_permit: work_permit %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
