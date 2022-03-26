@@ -1,2 +1,28 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+// Fixes Bootstrap floating form selects cutting off 'g' and 'y'
+.form-floating > .form-select {
+  padding-bottom: 0 !important;
+}
+
+.bg-green {
+  background-color: $green-400;
+}
+
+.bg-orange {
+  background-color: $orange-500;
+}
+
+.bg-red {
+  background-color: $red-500;
+}
+
+.bg-purple {
+  background-color: $purple-400;
+}
+
+.bg-cyan {
+  background-color: $cyan-500;
+}
+
