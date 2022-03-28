@@ -13,11 +13,11 @@ class WorkPermit < ApplicationRecord
   end
 
   def formatted_start_date
-    start_date.strftime('%m/%d/%y')
+    start_date.in_time_zone('Pacific Time (US & Canada)').strftime('%m/%d/%y')
   end
 
   def formatted_end_date
-    end_date.strftime('%m/%d/%y')
+    end_date.in_time_zone('Pacific Time (US & Canada)').strftime('%m/%d/%y')
   end
 
   def hazard_names

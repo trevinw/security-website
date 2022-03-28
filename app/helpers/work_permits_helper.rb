@@ -14,9 +14,9 @@ module WorkPermitsHelper
   def status_message(work_permit)
     case work_permit.status
     when 'Returned' then ''
-    when 'Out', 'Out/Disabled' then "Permit checked out at #{work_permit.updated_at.strftime('%H:%M %m/%d/%y')}"
-    when 'Missing' then "Permit missing as of #{work_permit.updated_at.strftime('%H:%M %m/%d/%y')}"
-    when 'Expired' then "Permit expired and in EOC.\nMail to <b>#{work_permit.seh_representative}</b> on #{(work_permit.updated_at + 2.days).strftime('%m/%d/%y')}".html_safe
+    when 'Out', 'Out/Disabled' then "Permit checked out at #{work_permit.updated_at.in_time_zone('Pacific Time (US & Canada)').strftime('%H:%M %m/%d/%y')}"
+    when 'Missing' then "Permit missing as of #{work_permit.updated_at.in_time_zone('Pacific Time (US & Canada)').strftime('%H:%M %m/%d/%y')}"
+    when 'Expired' then "Permit expired and in EOC.\nMail to <b>#{work_permit.seh_representative}</b> on #{(work_permit.updated_at.in_time_zone('Pacific Time (US & Canada)') + 2.days).strftime('%m/%d/%y')}".html_safe
     end
   end
 
