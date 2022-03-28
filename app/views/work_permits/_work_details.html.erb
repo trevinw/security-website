@@ -17,10 +17,10 @@
   </li>
 
   <li class="list-group-item">
-    <b>Work Description: </b><%= work_permit.work_description %>
+    <b>Work Description: </b><%= simple_format(work_permit.work_description, { class: 'mb-0' }) %>
   </li>  
 
   <% if work_permit.notes && !work_permit.notes.empty? %>
-    <li class="list-group-item"><b>Notes: </b><%= work_permit.notes %></li>
+    <li class="list-group-item"><b>Notes: </b><%= simple_format(work_permit.notes) %></li>
   <% end %>
 </ul>
