@@ -1,34 +1,36 @@
 <div class="accordion" id="sidebar-accordion">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="heading-one">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-one">
-        Security
-      </button>
-    </h2>
-    <div id="collapse-one" class="accordion-collapse collapse show">
-      <div class="accordion-body p-0">
-        <ul class="list-group list-group-flush">
-          <%= link_to(root_path, { class: "list-group-item list-group-item-action #{active_class(params[:controller], 'pages')}" }) do %>
-            <i class="bi bi-house"></i>
-            Home
-          <% end %>
+  <% if current_user.has_any_role?(:admin, :security_lead, :security_rover) %>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="heading-one">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-one">
+          Security
+        </button>
+      </h2>
+      <div id="collapse-one" class="accordion-collapse collapse show">
+        <div class="accordion-body p-0">
+          <ul class="list-group list-group-flush">
+            <%= link_to(root_path, { class: "list-group-item list-group-item-action #{active_class(params[:controller], 'pages')}" }) do %>
+              <i class="bi bi-house"></i>
+              Home
+            <% end %>
 
-          <%= link_to(work_permits_path, { class: "list-group-item list-group-item-action #{active_class(params[:controller], 'work_permits')}" }) do %>
-            <i class="bi bi-clipboard"></i>
-            Work Permits
-          <% end %>
+            <%= link_to(work_permits_path, { class: "list-group-item list-group-item-action #{active_class(params[:controller], 'work_permits')}" }) do %>
+              <i class="bi bi-clipboard"></i>
+              Work Permits
+            <% end %>
 
-          <%= link_to(root_path, { class: "list-group-item list-group-item-action #{active_class(params[:controller], 'deliveries')}" }) do %>
-            <i class="bi bi-truck"></i>
-            Deliveries
-          <% end %>
+            <%= link_to(root_path, { class: "list-group-item list-group-item-action #{active_class(params[:controller], 'deliveries')}" }) do %>
+              <i class="bi bi-truck"></i>
+              Deliveries
+            <% end %>
 
-          <%= link_to(root_path, { class: "list-group-item list-group-item-action #{active_class(params[:controller], 'lockers')}" }) do %>
-            <i class="bi bi-lock"></i>
-            Lockers
-          <% end %>
-        </ul>
+            <%= link_to(root_path, { class: "list-group-item list-group-item-action #{active_class(params[:controller], 'lockers')}" }) do %>
+              <i class="bi bi-lock"></i>
+              Lockers
+            <% end %>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>

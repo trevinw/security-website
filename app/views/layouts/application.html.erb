@@ -17,7 +17,9 @@
     <div class="row">
       <div class="col-2">
         <div class="sticky-top">
-          <%= render '/shared/sidebar' %>
+          <% if user_signed_in? %>
+            <%= render '/shared/sidebar' %>
+          <% end %>
         </div>
       </div>
 
