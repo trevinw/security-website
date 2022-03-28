@@ -85,8 +85,9 @@ class WorkPermitsController < ApplicationController
     else
       # Query to get first Company sorted by name that has >0 Work Permits belonging to it
       # Query used is modified from stackoverflow link below
+      # https://stackoverflow.com/questions/54231074/how-do-i-count-the-number-of-records-that-have-one-or-more-associated-object
       # https://stackoverflow.com/a/39478498/14768757
-      company = Company.distinct.joins(:work_permits).merge(WorkPermit.order(company: :desc)).order(:name).first
+      company = Company.joins(:work_permits).order(name: :asc).first
       @work_permits = WorkPermit.where(company:)
                                 .order(:number)
                                 .includes(:buildings)
@@ -99,11 +100,11 @@ class WorkPermitsController < ApplicationController
   end
 
   def set_hazards
-    @hazards = Hazard.all.order(:number)
+    @hazards = Hazard.all.order(:name)
   end
 
   def set_companies
-    @companies = Company.joins(:work_permits).uniq
+    @companies = Company.joins(:work_permits).order(name: :asc).uniq
   end
 
   def set_company_name
@@ -116,7 +117,7 @@ class WorkPermitsController < ApplicationController
     @active_company_id = if params[:company_id]
                            params[:company_id].to_i
                          else
-                           Company.distinct.joins(:work_permits).merge(WorkPermit.order(company: :desc)).order(:name).first.id
+                           Company.joins(:work_permits).order(name: :asc).first.id
                          end
   end
 end
