@@ -4,12 +4,14 @@ class Api::PagesController < ApplicationController
   def badge
     if params[:badge]
       s2_session_id = S2Netbox::Commands::Authentication.login.session_id
-      info = get_info(s2_session_id).details
+      info = get_info(s2_session_id)
       picture = get_picture(s2_session_id)
 
-      S2Netbox::Commands::Authentication.logout(s2_session_id)
-
-      render json: { info:, picture: }
+      if info.success && picture.success
+        render json: { info: info.details, picture: picture.details['PICTURE'] }
+      else
+        render json: { error: 'Something went wrong with the request, possibly an invalid badge number?' }
+      end
     else
       render json: { error: 'Must specify a badge in the query string, such as: `/badge?badge=1234`' }
     end
@@ -30,6 +32,6 @@ class Api::PagesController < ApplicationController
       'GetPicture',
       { PERSONID: params[:badge] },
       s2_session_id
-    ).details['PICTURE']
+    )
   end
 end
