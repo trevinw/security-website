@@ -9,6 +9,7 @@ class PagesController < ApplicationController
     picture = get_picture(s2_session_id)
 
     if info.success && picture.success
+      flash.alert = nil
       @picture = picture.details['PICTURE']
       @full_name = "#{info.details['FIRSTNAME']} #{info.details['LASTNAME']}"
     else

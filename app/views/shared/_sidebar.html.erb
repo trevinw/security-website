@@ -9,7 +9,7 @@
       <div id="collapse-one" class="accordion-collapse collapse show">
         <div class="accordion-body p-0">
           <ul class="list-group list-group-flush">
-            <%= link_to(root_path, { class: "list-group-item list-group-item-action #{active_class(params[:controller], 'pages')}" }) do %>
+            <%= link_to(root_path, { class: "list-group-item list-group-item-action #{current_page?(controller: 'pages', action: 'home') ? 'active' : ''}" }) do %>
               <i class="bi bi-house"></i>
               Home
             <% end %>
@@ -27,6 +27,31 @@
             <%= link_to(root_path, { class: "list-group-item list-group-item-action #{active_class(params[:controller], 'lockers')}" }) do %>
               <i class="bi bi-lock"></i>
               Lockers
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <% if current_user.has_any_role?(:admin, :security_lead, :supervisor) %>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="heading-two">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-two">
+          Supervisor
+        </button>
+      </h2>
+      <div id="collapse-two" class="accordion-collapse collapse">
+        <div class="accordion-body p-0">
+          <ul class="list-group list-group-flush">
+            <%= link_to(root_path, { class: "list-group-item list-group-item-action #{current_page?(controller: 'pages', action: 'home') ? 'active' : ''}" }) do %>
+              <i class="bi bi-house"></i>
+              Home
+            <% end %>
+
+            <%= link_to('/badge', { class: "list-group-item list-group-item-action #{current_page?(controller: 'pages', action: 'badge') ? 'active' : ''}"}) do %>
+              <i class="bi bi-person-badge"></i>
+              Badge Picture
             <% end %>
           </ul>
         </div>
