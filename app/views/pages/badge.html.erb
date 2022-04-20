@@ -1,0 +1,23 @@
+<% if @picture %>
+  <div class="card w-25 mb-3">
+    <%= image_tag "data:image/jpeg;base64,#{@picture}", class: 'card-img-top' %>
+    <div class="card-body text-center">
+      <h5 class="card-title"><%= "#{@full_name}" %></h5>
+      <%= link_to "data:image/jpeg;base64,#{@picture}", download: "#{@full_name}.jpg", class: 'btn btn-primary' do %>
+        <i class="bi bi-download"></i>
+        Download Image
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <h5>Search for an employee's badge picture using the form</h5>
+<% end %>
+
+<%= form_with url: '/badge', method: :get, class: 'text-center w-25' do |form| %>
+  <div class="form-floating mb-3">
+    <%= form.number_field :badge, class: 'form-control', required: true, placeholder: 'Badge' %>
+    <%= form.label :badge, 'Employee Badge' %>
+  </div>
+
+  <%= form.submit 'Search', class: 'btn btn-success' %>
+<% end %>

@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   root 'pages#home'
 
-  resources :work_permits
   resources :companies, only: %i[new create]
+  resources :work_permits
+
+  get '/badge', to: 'pages#badge'
 
   namespace :api do
     get '/badge', to: 'pages#badge'
