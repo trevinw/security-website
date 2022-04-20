@@ -6,7 +6,7 @@
   <li class="list-group-item">
     <b>Building Bypass?: </b>
     <% if work_permit.needs_bypass? %>
-      <i class="bi bi-check-lg"></i>
+      <h2 class="text-danger fw-bold underline">Bypass!</h2>
     <% else %>
       <i class="bi bi-x-lg"></i>
     <% end %>
@@ -18,7 +18,7 @@
 
   <li class="list-group-item">
     <b>Work Description: </b><%= simple_format(work_permit.work_description, { class: 'mb-0' }) %>
-  </li>  
+  </li>
 
   <% if work_permit.notes && !work_permit.notes.empty? %>
     <li class="list-group-item"><b>Notes: </b><%= simple_format(work_permit.notes) %></li>
