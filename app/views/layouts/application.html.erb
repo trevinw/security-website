@@ -25,10 +25,11 @@
 
       <div class="col-10">
         <% if notice %>
-          <p class="notice"><%= notice %></p>
+          <div class="alert alert-warning"><%= notice %></div>
         <% end %>
+
         <% if alert %>
-          <p class="alert"><%= alert %></p>
+          <div class="alert alert-danger"><%= alert %></div>
         <% end %>
 
         <%= yield %>
