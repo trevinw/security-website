@@ -23,10 +23,10 @@ test:
 production:
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
-  adapter: sqlserver
+  adapter: <%= ENV['PROD_DB_ADAPTER'] %>
   mode: dblib
-  host: <%= ENV['MSSQL_PROD_HOST'] %>
-  port: <%= ENV['MSSQL_PROD_PORT'] %>
-  username: <%= ENV['MSSQL_PROD_USERNAME'] %>
-  password: <%= ENV['MSSQL_PROD_PASSWORD'] %>
-  database: <%= ENV['MSSQL_PROD_DATABASE'] %>
+  host: <%= ENV['PROD_DB_HOST'] %>
+  port: <%= ENV['PROD_DB_PORT'] %>
+  username: <%= ENV['PROD_DB_USERNAME'] %>
+  password: <%= ENV['PROD_DB_PASSWORD'] %>
+  database: <%= ENV['PROD_DB_DATABASE'] %>
