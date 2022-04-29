@@ -8,6 +8,17 @@ class WorkPermit < ApplicationRecord
   after_create_commit { broadcast_append_later_to('work_permits') }
   after_update_commit { broadcast_update_later_to('work_permits') }
 
+  STATUSES = [
+    'Returned',
+    'Out',
+    'Out - Building Disabled',
+    'Out - Ozone Disabled',
+    'Out - Building & Ozone Disabled',
+    'Missing',
+    'Expired',
+    'Out for Extension'
+  ].freeze
+
   def expired?
     end_date < Date.today
   end
@@ -24,7 +35,15 @@ class WorkPermit < ApplicationRecord
     hazards.map(&:name).sort
   end
 
-  def needs_bypass?
-    needs_bypass
+  def bypass_building?
+    bypass_building
+  end
+
+  def bypass_ozone?
+    bypass_ozone
+  end
+
+  def self.statuses
+    STATUSES
   end
 end

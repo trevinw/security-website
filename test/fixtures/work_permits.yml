@@ -9,7 +9,7 @@ one:
   start_date: 2022-02-28
   end_date: 2022-02-28
   category: MyString
-  needs_bypass: false
+  bypass_building: false
   seh_representative: MyString
   alternative_contact: MyString
 
@@ -22,6 +22,6 @@ two:
   start_date: 2022-02-28
   end_date: 2022-02-28
   category: MyString
-  needs_bypass: false
+  bypass_building: false
   seh_representative: MyString
   alternative_contact: MyString

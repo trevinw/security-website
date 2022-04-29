@@ -17,38 +17,47 @@
         <div class="row">
           <div class="col">
             <div class="row mb-3">
-              <div class="col-2">
+              <div class="col-4">
                 <div class="form-floating">
                   <%= form.number_field(:number, { class: 'form-control', placeholder: 'Number', required: true, min: 1, step: 1 }) %>
                   <%= form.label(:number) %>
                 </div>
               </div>
 
-              <div class="col-3">
+              <div class="col-4">
                 <div class="form-floating">
                   <%= form.collection_select(:company_id, companies, :id, :name, {}, { class: 'form-select', placeholder: 'Company', required: true }) %>
                   <%= form.label(:company)%>
                 </div>
               </div>
 
-              <div class="col-2">
+              <div class="col-4">
                 <div class="form-floating">
                   <%= form.select(:category, ['Regular', 'Hazardous'], {}, { class: 'form-select', placeholder: 'Category', required: true }) %>
                   <%= form.label(:category) %>
                 </div>
               </div>
+            </div>
 
-              <div class="col-2">
+            <div class="row mb-3">
+              <div class="col-4">
                 <div class="form-floating">
-                  <%= form.select(:needs_bypass, [['Yes', true], ['No', false]], {}, { class: 'form-select', required: true }) %>
-                  <%= form.label(:needs_bypass, 'Bypass?') %>
+                  <%= form.select(:status, WorkPermit.statuses, {}, { class: 'form-select', required: true, selected: 'Returned' }) %>
+                  <%= form.label(:status) %>
                 </div>
               </div>
-              
-              <div class="col-3">
+
+              <div class="col-4">
                 <div class="form-floating">
-                  <%= form.select(:status, ['Returned', 'Out', 'Out/Disabled', 'Missing', 'Expired'], {}, { class: 'form-select', required: true, selected: 'Returned' }) %>
-                  <%= form.label(:status) %>
+                  <%= form.select(:bypass_building, [['Yes', true], ['No', false]], {}, { class: 'form-select', required: true }) %>
+                  <%= form.label(:bypass_building, 'Bypass Building?') %>
+                </div>
+              </div>
+
+              <div class="col-4">
+                <div class="form-floating">
+                  <%= form.select(:bypass_ozone, [['Yes', true], ['No', false]], {}, { class: 'form-select', required: true }) %>
+                  <%= form.label(:bypass_ozone, 'Bypass Ozone?') %>
                 </div>
               </div>
             </div>
@@ -114,14 +123,14 @@
             </div>
 
             <div class="row mb-3">
-              <div class="col-5">
+              <div class="col-4">
                 <div class="form-floating">
                   <%= form.text_field(:work_location, { class: 'form-control', placeholder: 'Work Location', required: true }) %>
                   <%= form.label(:work_location, 'Work Location') %>
                 </div>
               </div>
 
-              <div class="col-7">
+              <div class="col-4">
                 <div class="form-floating">
                   <%= form.text_area(
                     :work_description,
@@ -134,6 +143,21 @@
                     }
                   ) %>
                   <%= form.label(:work_description, 'Work Description') %>
+                </div>
+              </div>
+
+              <div class="col-4">
+                <div class="form-floating">
+                  <%= form.text_area(
+                    :notes,
+                    {
+                      class: 'form-control',
+                      placeholder: 'Notes',
+                      oninput: 'this.style.height = "";this.style.height = this.scrollHeight + "px"',
+                      onclick: 'this.style.height = "";this.style.height = this.scrollHeight + "px"',
+                    }
+                  ) %>
+                  <%= form.label(:notes, 'Notes') %>
                 </div>
               </div>
             </div>

@@ -2,7 +2,7 @@
 @import 'bootstrap-icons/font/bootstrap-icons';
 
 // Fixes Bootstrap floating form selects cutting off 'g' and 'y'
-.form-floating > .form-select {
+.form-floating>.form-select {
   padding-bottom: 0 !important;
 }
 
@@ -26,3 +26,6 @@
   background-color: $cyan-500;
 }
 
+.bg-yellow {
+  background-color: $yellow-500;
+}

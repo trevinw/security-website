@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_26_052925) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_28_083600) do
   create_table "buildings", force: :cascade do |t|
     t.integer "number"
     t.datetime "created_at", null: false
@@ -30,6 +30,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_052925) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "deliveries", force: :cascade do |t|
+    t.datetime "date_time"
+    t.string "company"
+    t.string "category"
+    t.string "location"
+    t.boolean "chemical_delivery"
+    t.string "chemical_type"
+    t.string "seh_contact"
+    t.text "notes"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_deliveries_on_user_id"
   end
 
   create_table "hazards", force: :cascade do |t|
@@ -88,12 +103,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_052925) do
     t.date "start_date"
     t.date "end_date"
     t.string "category"
-    t.boolean "needs_bypass"
+    t.boolean "bypass_building"
     t.string "seh_representative"
     t.string "alternative_contact"
     t.integer "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "bypass_ozone"
     t.index ["company_id"], name: "index_work_permits_on_company_id"
   end
 
