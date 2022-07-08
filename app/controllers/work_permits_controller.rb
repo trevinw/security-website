@@ -73,7 +73,8 @@ class WorkPermitsController < ApplicationController
   def work_permit_params
     params.require(:work_permit).permit(:number, :company, :status, :work_location, :work_description, :notes,
                                         :start_date, :end_date, :category, :company_id, :bypass_building, :bypass_ozone,
-                                        :seh_representative, :alternative_contact, building_ids: [], hazard_ids: [])
+                                        :seh_representative, :alternative_contact, :cover_uv_sensor, building_ids: [],
+                                                                                                     hazard_ids: [])
   end
 
   def set_work_permits

@@ -4,16 +4,17 @@
   </li>
 
   <li class="list-group-item">
-    <b>Building/Ozone Bypass?: </b>
-    <% if work_permit.bypass_building? && work_permit.bypass_ozone? %>
-      <h2 class="text-danger fw-bold underline">Bypass Building & Ozone!</h2>
-    <% elsif work_permit.bypass_building? %>
-      <h2 class="text-danger fw-bold underline">Bypass Building!</h2>
-    <% elsif work_permit.bypass_ozone? %>
-      <h2 class="text-danger fw-bold underline">Bypass Ozone!</h2>
-    <% else %>
-      <i class="bi bi-x-lg"></i>
-    <% end %>
+    <b>Bypasses: </b>
+    <h2 class="text-danger fw-bold underline mb-0">
+      <%= simple_format(
+        bypasses_string(
+          work_permit.bypass_building?,
+          work_permit.bypass_ozone?,
+          work_permit.cover_uv_sensor?
+        ),
+        class: 'mb-0'
+      ) %>
+    </h2>
   </li>
 
   <li class="list-group-item">

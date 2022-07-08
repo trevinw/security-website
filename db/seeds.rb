@@ -29,9 +29,10 @@ hazard_names.each do |hazard_name|
   Hazard.create(name: hazard_name)
 end
 
-building_numbers = [
+BUILDING_NUMBERS = [
   10,
   15,
+  16,
   17,
   30,
   31,
@@ -53,33 +54,47 @@ building_numbers = [
   64,
   65,
   66
-]
+].freeze
 
-building_numbers.each { |building_number| Building.create(number: building_number) }
+BUILDING_NUMBERS.each { |building_number| Building.create(number: building_number) }
 
-company_names = [
+COMPANY_NAMES = [
+  'ATG',
   'EC Company',
+  'EC Company (EEW)',
   'JH Kelly',
   'SEH',
   'Stoner'
-]
+].freeze
 
-company_names.each { |company_name| Company.create(name: company_name) }
+STATUSES = [
+  'Returned',
+  'Out',
+  'Out - Building Disabled',
+  'Out - Ozone Disabled',
+  'Out - Building & Ozone Disabled',
+  'Missing',
+  'Expired',
+  'Out for Extension'
+].freeze
+
+COMPANY_NAMES.each { |company_name| Company.create(name: company_name) }
 
 20.times do |index|
   WorkPermit.create!(
+    alternative_contact: "#{Faker::Name.first_name} #{Faker::Name.last_name}",
+    bypass_building: rand > 0.5,
+    bypass_ozone: rand > 0.5,
+    category: %w[Regular Hazardous].sample,
+    cover_uv_sensor: rand > 0.5,
     number: index + 1,
-    status: ['Returned', 'Out', 'Out/Disabled', 'Missing', 'Expired'].sample,
-    work_location: Faker::Lorem.sentence(word_count: 10),
+    seh_representative: "#{Faker::Name.first_name} #{Faker::Name.last_name}",
+    status: STATUSES.sample,
+    work_location: Faker::Lorem.sentence(word_count: 5),
     work_description: Faker::Lorem.sentence(word_count: 20),
     notes: Faker::Lorem.sentence(word_count: 5),
     start_date: Date.today + [-2, -1, 0, 1, 2].sample,
     end_date: Date.today + [3, 4, 5, 6, 7].sample,
-    category: %w[Regular Hazardous].sample,
-    bypass_building: rand > 0.5,
-    bypass_ozone: rand > 0.5,
-    seh_representative: "#{Faker::Name.first_name} #{Faker::Name.last_name}",
-    alternative_contact: "#{Faker::Name.first_name} #{Faker::Name.last_name}",
     company: Company.all.sample,
     buildings: [Building.all.sample],
     hazards: [Hazard.all.sample]

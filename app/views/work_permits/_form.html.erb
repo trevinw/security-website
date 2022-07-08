@@ -40,24 +40,31 @@
             </div>
 
             <div class="row mb-3">
-              <div class="col-4">
+              <div class="col-3">
                 <div class="form-floating">
                   <%= form.select(:status, WorkPermit.statuses, {}, { class: 'form-select', required: true, selected: 'Returned' }) %>
                   <%= form.label(:status) %>
                 </div>
               </div>
 
-              <div class="col-4">
+              <div class="col-3">
                 <div class="form-floating">
                   <%= form.select(:bypass_building, [['Yes', true], ['No', false]], {}, { class: 'form-select', required: true }) %>
                   <%= form.label(:bypass_building, 'Bypass Building?') %>
                 </div>
               </div>
 
-              <div class="col-4">
+              <div class="col-3">
                 <div class="form-floating">
                   <%= form.select(:bypass_ozone, [['Yes', true], ['No', false]], {}, { class: 'form-select', required: true }) %>
                   <%= form.label(:bypass_ozone, 'Bypass Ozone?') %>
+                </div>
+              </div>
+
+              <div class="col-3">
+                <div class="form-floating">
+                  <%= form.select(:cover_uv_sensor, [['Yes', true], ['No', false]], {}, { class: 'form-select', required: true }) %>
+                  <%= form.label(:cover_uv_sensor, 'Cover UV Sensor?') %>
                 </div>
               </div>
             </div>

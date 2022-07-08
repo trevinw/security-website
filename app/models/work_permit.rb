@@ -3,7 +3,18 @@ class WorkPermit < ApplicationRecord
   has_and_belongs_to_many :buildings
   has_and_belongs_to_many :hazards
 
-  validates :number, numericality: { greater_than: 0 }
+  validates :alternative_contact, presence: true
+  validates :bypass_building, inclusion: { in: [true, false] }
+  validates :bypass_ozone, inclusion: { in: [true, false] }
+  validates :category, presence: true
+  validates :cover_uv_sensor, inclusion: { in: [true, false] }
+  validates :number, numericality: { greater_than: 0, only_integer: true }
+  validates :seh_representative, presence: true
+  validates :status, presence: true
+  validates :work_location, presence: true
+  validates :work_description, presence: true
+  validates :start_date, presence: true
+  validates :end_date, presence: true
 
   after_create_commit { broadcast_append_later_to('work_permits') }
   after_update_commit { broadcast_update_later_to('work_permits') }
@@ -41,6 +52,10 @@ class WorkPermit < ApplicationRecord
 
   def bypass_ozone?
     bypass_ozone
+  end
+
+  def cover_uv_sensor?
+    cover_uv_sensor
   end
 
   def self.statuses
