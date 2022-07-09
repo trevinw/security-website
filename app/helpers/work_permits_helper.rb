@@ -45,13 +45,4 @@ module WorkPermitsHelper
   def buildings_html(buildings)
     "<b>#{'Building'.pluralize(buildings.length)}: </b>#{buildings.sort.map(&:number).join(', ')}".html_safe
   end
-
-  def bypasses_string(bypass_building, bypass_ozone, cover_uv_sensor)
-    string = ''
-    string += "Bypass Building!\n" if bypass_building
-    string += "Bypass Ozone!\n" if bypass_ozone
-    string += 'Cover UV Sensor!' if cover_uv_sensor
-
-    string
-  end
 end
