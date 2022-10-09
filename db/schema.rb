@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_08_083943) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_04_085420) do
   create_table "buildings", force: :cascade do |t|
     t.integer "number"
     t.datetime "created_at", null: false
@@ -33,10 +33,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_083943) do
   end
 
   create_table "deliveries", force: :cascade do |t|
-    t.datetime "date_time"
+    t.datetime "datetime"
     t.string "company"
     t.string "category"
-    t.string "location"
+    t.string "destination"
     t.boolean "chemical_delivery"
     t.string "chemical_type"
     t.string "seh_contact"
@@ -114,5 +114,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_083943) do
     t.index ["company_id"], name: "index_work_permits_on_company_id"
   end
 
+  add_foreign_key "deliveries", "users"
   add_foreign_key "work_permits", "companies"
 end

@@ -1,0 +1,173 @@
+<%= form_with(model: delivery) do |form| %>
+  <div class="alert alert-primary" role="alert">
+    Leave blank for the current Date & Time
+  </div>
+
+  <div class="form-floating mb-3">
+    <%= form.datetime_field :datetime, { class: 'form-control', placeholder: 'Date & Time' } %>
+    <%= form.label :datetime, 'Date & Time' %>
+    <%= %>
+  </div>
+
+  <div class="form-floating mb-3">
+    <%= form.text_field :company, { class: 'form-control', placeholder: 'Company', autofocus: true } %>
+    <%= form.label :company %>
+  </div>
+
+  <div class="form-floating mb-3">
+    <%= form.select :category, ['Delivery', 'Pick-Up'], {}, { class: 'form-select', placeholder: 'Category', required: true } %>
+    <%= form.label :category %>
+  </div>
+
+  <div class="row mb-3">
+    <div class="alert alert-primary" role="alert" data-delivery-target="destinationMessage">
+      Select a Destination below, or select Other to type a custom Destination
+    </div>
+
+    <div class="col-6">
+      <div class="form-floating">
+        <%= form.select(
+          :destination,
+          Delivery.destinations,
+          {},
+          {
+            class: 'form-select',
+            placeholder: 'Destination',
+            required: true,
+            'data-delivery-target': 'destinationSelect',
+            'data-action': 'change->delivery#toggleDestinationTextInput'
+          }) %>
+        <%= form.label :destination %>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="form-floating">
+        <%= form.text_field(
+          :destination,
+          {
+            class: 'form-control',
+            placeholder: 'Destination',
+            disabled: true,
+            'data-delivery-target': 'destinationTextField',
+            'data-action': 'delivery#toggleDestinationSelect'
+          }) %>
+        <%= form.label :destination %>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-floating mb-3">
+    <%= form.select(
+      :chemical_delivery,
+      [['Yes', true], ['No', false]],
+      {},
+      {
+        class: 'form-select',
+        placeholder: 'Chemical Delivery?',
+        required: true,
+        'data-delivery-target': 'chemicalDeliverySelect',
+        'data-action': 'change->delivery#disableChemicalTypeSelect'
+      }) %>
+    <%= form.label :chemical_delivery, 'Chemical Delivery?' %>
+  </div>
+
+  <div class="row mb-3">
+    <div class="alert alert-primary" role="alert" data-delivery-target="chemicalMessage">
+      Select a Chemical below, or select Other to type a custom Chemical
+    </div>
+    
+    <div class="col-6">
+      <div class="form-floating">
+        <%= form.select(
+          :chemical_type,
+          Delivery.chemical_types,
+          {},
+          {
+            class: 'form-select',
+            placeholder: 'Chemical Type',
+            required: true,
+            'data-delivery-target': 'chemicalTypeSelect',
+            'data-action': 'change->delivery#toggleChemicalTextInput'
+          }) %>
+        <%= form.label :chemical_type, 'Chemical Type' %>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="form-floating">
+        <%= form.text_field(
+          :chemical_type,
+          {
+            class: 'form-control',
+            placeholder: 'Chemical Type',
+            disabled: true,
+            'data-delivery-target': 'chemicalTypeTextField',
+            'data-action': 'delivery#toggleChemicalSelect'
+          }) %>
+        <%= form.label :chemical_type, 'Chemical Type' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="alert alert-primary" role="alert" data-delivery-target="contactMessage">
+      Select an SEH Contact below, or select other to type a custom SEH Contact
+    </div>
+
+    <div class="col-6">
+      <div class="form-floating">
+        <%= form.select(
+          :seh_contact,
+          Delivery.seh_contacts,
+          {},
+          {
+            class: 'form-select',
+            placeholder: 'SEH Contact',
+            required: true,
+            'data-delivery-target': 'contactSelect',
+            'data-action': 'change->delivery#toggleContactTextInput'
+          }
+        ) %>
+        <%= form.label :seh_contact, 'SEH Contact' %>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="form-floating">
+        <%= form.text_field(
+          :seh_contact,
+          {
+            class: 'form-control',
+            placeholder: 'SEH Contact',
+            disabled: true,
+            'data-delivery-target': 'contactTextField',
+            'data-action': 'delivery#toggleContactSelect'
+          }
+        ) %>
+        <%= form.label :seh_contact, 'SEH Contact' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-floating mb-3">
+    <%= form.select(
+      :user_id,
+      options_from_collection_for_select(@users, :id, :full_name_with_badge, current_user.id),
+      {},
+      {
+        class: 'form-select',
+        placeholder: 'Badge Number'
+      }
+    )%>
+    <%= form.label :user_id, 'Badge Number' %>
+  </div>
+
+  <div class="form-floating mb-3">
+    <%= form.text_area :notes, { class: 'form-control', placeholder: 'Notes' } %>
+    <%= form.label :notes %>
+  </div>
+
+  <%= form.submit({ class: 'btn btn-success' }) %>
+<% end %>

@@ -1,0 +1,35 @@
+<div class="container" data-controller="delivery">
+  <div class="row">
+    <div id="new_delivery_form" class="col-6 text-center">
+      <%= render 'form', delivery: @delivery %>
+    </div>
+
+    <div class="col-6 text-center">
+      <%= form_with url: deliveries_path, method: :get do |form| %>
+        <div class="row mb-3">
+          <div class="col mx-1">
+            <div class="form-floating">
+              <%= form.date_field :start_date, { class: 'form-control', placeholder: 'Start Date' } %>
+              <%= form.label :start_date, 'Start Date' %>
+            </div>
+          </div>
+
+          <div class="col mx-1">
+            <div class="form-floating">
+              <%= form.date_field :end_date, { class: 'form-control', placeholder: 'End Date'} %>
+              <%= form.label :end_date, 'End Date' %>
+            </div>
+          </div>
+
+          <%= form.submit 'Search', { class: 'btn btn-success mt-2' } %>
+        </div>
+      <% end %>
+      
+      <h2><%= @date_string %></h2>
+
+      <div id="deliveries" class="accordion">
+        <%= render @deliveries unless @deliveries.nil? %>
+      </div>
+    </div>
+  </div>
+</div>

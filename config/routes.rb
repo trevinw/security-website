@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :deliveries
   root 'pages#home'
 
   resources :companies, only: %i[new create]

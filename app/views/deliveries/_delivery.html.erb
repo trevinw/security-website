@@ -1,0 +1,53 @@
+<div class="accordion-item">
+  <h2 class="accordion-header" id="<%= dom_id(delivery) %>_header">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<%= dom_id(delivery) %>_collapse">
+      <%= "#{delivery.company} #{delivery.category} - #{delivery.destination} @ #{delivery.time}" %>
+    </button>
+  </h2>
+
+  <div id="<%= dom_id(delivery) %>_collapse" class="accordion-collapse collapse">
+    <div class="accordion-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <strong>Date:</strong> <%= delivery.date %>
+        </li>
+
+        <li class="list-group-item">
+          <strong>Time:</strong> <%= delivery.time %>
+        </li>
+
+        <li class="list-group-item">
+          <strong>Company:</strong> <%= delivery.company %>
+        </li>
+
+        <li class="list-group-item">
+          <strong>Destination:</strong> <%= delivery.destination %>
+        </li>
+
+        <% if delivery.chemical_delivery && !delivery.chemical_type.nil? %>
+          <li class="list-group-item">
+            <strong>Chemical Type:</strong> <%= delivery.chemical_type %>
+          </li>
+        <% end %>
+
+        <% unless delivery.seh_contact == 'N/A' %>
+          <li class="list-group-item">
+            <strong>SEH Contact:</strong> <%= delivery.seh_contact %>
+          </li>
+        <% end %>
+
+        <% unless delivery.notes.empty? %>
+          <li class="list-group-item">
+            <strong>Notes:</strong> <%= delivery.notes %>
+          </li>
+        <% end %>
+
+        <li class="list-group-item">
+          <%= link_to 'Edit', edit_delivery_path(delivery), { class: 'btn btn-success' } %>
+
+          <%= link_to 'Delete', delivery_path(delivery), { class: 'btn btn-danger', data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } } %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

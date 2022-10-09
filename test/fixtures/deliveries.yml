@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  datetime: 2022-10-04 01:54:20
+  company: MyString
+  category: MyString
+  destination: MyString
+  chemical_delivery: false
+  chemical_type: MyString
+  seh_contact: MyString
+  notes: MyText
+
+two:
+  datetime: 2022-10-04 01:54:20
+  company: MyString
+  category: MyString
+  destination: MyString
+  chemical_delivery: false
+  chemical_type: MyString
+  seh_contact: MyString
+  notes: MyText
