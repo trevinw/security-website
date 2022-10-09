@@ -3,20 +3,22 @@
     <%= buildings_html(work_permit.buildings) %>
   </li>
 
-  <li class="list-group-item">
-    <b>Bypasses: </b>
-    <h2 class="fw-bold underline mb-0">
-      <% if work_permit.bypass_building? %>
-        <p class="text-danger mb-0">Bypass Building!</p>
-      <% end %>
-      <% if work_permit.bypass_ozone? %>
-        <p class="text-warning mb-0">Bypass Ozone!</p>
-      <% end %>
-      <% if work_permit.cover_uv_sensor? %>
-        <p class="text-info mb-0">Cover UV Sensor!</p>
-      <% end %>
-    </h2>
-  </li>
+  <% if work_permit.bypass_building? || work_permit.bypass_ozone? || work_permit.cover_uv_sensor? %>
+    <li class="list-group-item">
+      <b>Bypasses: </b>
+      <h2 class="fw-bold underline mb-0">
+        <% if work_permit.bypass_building? %>
+          <p class="text-danger mb-0">Bypass Building!</p>
+        <% end %>
+        <% if work_permit.bypass_ozone? %>
+          <p class="text-warning mb-0">Bypass Ozone!</p>
+        <% end %>
+        <% if work_permit.cover_uv_sensor? %>
+          <p class="text-info mb-0">Cover UV Sensor!</p>
+        <% end %>
+      </h2>
+    </li>
+  <% end %>
 
   <li class="list-group-item">
     <b>Work Location: </b><%= work_permit.work_location %>
