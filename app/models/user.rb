@@ -1,9 +1,19 @@
 class User < ApplicationRecord
+  has_many :deliveries
+
   devise :ldap_authenticatable
   rolify before_add: :remove_previous_role
 
   before_create :add_info_from_s2
   after_create :assign_default_role
+
+  def capital_username
+    username.upcase
+  end
+
+  def full_name_with_badge
+    "#{badge} - #{first_name} #{last_name}"
+  end
 
   private
 
