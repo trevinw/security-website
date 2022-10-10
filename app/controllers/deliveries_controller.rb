@@ -5,12 +5,16 @@ class DeliveriesController < ApplicationController
   def index
     if params[:start_date] && params[:end_date]
       start_date = DateTime.parse(params[:start_date])
-      end_date = DateTime.parse(params[:end_date])
+      begin
+        end_date = DateTime.parse(params[:end_date])
+      rescue ArgumentError => _e
+        end_date = DateTime.current.in_time_zone('Pacific Time (US & Canada)').end_of_day
+      end
       @deliveries = Delivery.where(datetime: start_date..end_date)
-      @date_string = "Deliveries from #{start_date.in_time_zone('Pacific Time (US & Canada)').strftime('%m/%d/%y')} - #{end_date.in_time_zone('Pacific Time (US & Canada)').strftime('%m/%d/%y')}"
+      @date_string = "Deliveries from #{start_date.strftime('%m/%d/%y')} - #{end_date.strftime('%m/%d/%y')}"
     else
-      @deliveries = Delivery.where(datetime: DateTime.now.midnight..DateTime.now.end_of_day).order(datetime: :desc)
-      @date_string = "Deliveries for #{DateTime.now.in_time_zone('Pacific Time (US & Canada)').strftime('%m/%d/%y')}"
+      @deliveries = Delivery.where(datetime: DateTime.current.midnight..DateTime.current.end_of_day).order(datetime: :desc)
+      @date_string = "Deliveries for #{DateTime.now.strftime('%m/%d/%y')}"
     end
 
     @delivery = Delivery.new

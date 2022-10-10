@@ -1,3 +1,5 @@
+<% content_for(:html_title) { 'Deliveries' } %>
+
 <div class="container" data-controller="delivery">
   <div class="row">
     <div id="new_delivery_form" class="col-6 text-center">
@@ -9,7 +11,7 @@
         <div class="row mb-3">
           <div class="col mx-1">
             <div class="form-floating">
-              <%= form.date_field :start_date, { class: 'form-control', placeholder: 'Start Date' } %>
+              <%= form.date_field :start_date, { class: 'form-control', placeholder: 'Start Date', required: true } %>
               <%= form.label :start_date, 'Start Date' %>
             </div>
           </div>
