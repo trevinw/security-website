@@ -13,7 +13,7 @@ class DeliveriesController < ApplicationController
       @deliveries = Delivery.where(datetime: start_date..end_date)
       @date_string = "Deliveries from #{start_date.strftime('%m/%d/%y')} - #{end_date.strftime('%m/%d/%y')}"
     else
-      @deliveries = Delivery.where(datetime: DateTime.current.midnight..DateTime.current.end_of_day).order(datetime: :desc)
+      @deliveries = Delivery.where(datetime: DateTime.now.midnight).order(datetime: :desc)
       @date_string = "Deliveries for #{DateTime.now.strftime('%m/%d/%y')}"
     end
 
@@ -59,7 +59,7 @@ class DeliveriesController < ApplicationController
   end
 
   def set_users
-    @users = User.with_any_role(:admin, :security_lead, :security_rover).sort_by(&:badge)
+    @users = User.active.with_any_role(:admin, :security_lead, :security_rover).sort_by(&:badge)
   end
 
   def delivery_params
