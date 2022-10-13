@@ -43,6 +43,10 @@
         <% end %>
 
         <li class="list-group-item">
+          <strong>User:</strong> <%= delivery.user.full_name_with_badge %>
+        </li>
+
+        <li class="list-group-item">
           <%= link_to 'Edit', edit_delivery_path(delivery), { class: 'btn btn-success' } %>
 
           <%= link_to 'Delete', delivery_path(delivery), { class: 'btn btn-danger', data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } } %>
