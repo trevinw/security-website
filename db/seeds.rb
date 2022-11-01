@@ -5,30 +5,6 @@ Building.destroy_all
 WorkPermit.destroy_all
 Company.destroy_all
 
-hazard_names = [
-  'Breaking of Lines or Ducting',
-  'Breaking/Cutting/Opening of Lines or Equipment',
-  'Confined Space Entry',
-  'Demolition',
-  'Elevated Work',
-  'Energized Electrical Work',
-  'Excavating/Trenching',
-  'General Hot Work',
-  'Hazardous Chemical/Gas',
-  'Lifting by Crane or Hoist',
-  'MCZ',
-  'Odor Generating Activity',
-  'Off Line Fire/Life/Safety System',
-  'Other (See Notes)',
-  'PSM/RMP Work',
-  'Supplied Air Respirator',
-  'X-Ray Radiation or Laser Beam Work'
-]
-
-hazard_names.each do |hazard_name|
-  Hazard.create(name: hazard_name)
-end
-
 BUILDING_NUMBERS = [
   10,
   15,
@@ -37,6 +13,7 @@ BUILDING_NUMBERS = [
   30,
   31,
   33,
+  34,
   40,
   41,
   42,
@@ -56,8 +33,6 @@ BUILDING_NUMBERS = [
   66
 ].freeze
 
-BUILDING_NUMBERS.each { |building_number| Building.create(number: building_number) }
-
 COMPANY_NAMES = [
   'ATG',
   'EC Company',
@@ -66,6 +41,27 @@ COMPANY_NAMES = [
   'SEH',
   'Stoner'
 ].freeze
+
+HAZARD_NAMES = [
+  'Breaking of Lines or Ducting',
+  'Breaking/Cutting/Opening of Lines or Equipment',
+  'Confined Space Entry',
+  'Demolition',
+  'Elevated Work',
+  'Energized Electrical Work',
+  'Excavating/Trenching',
+  'General Hot Work',
+  'Hazardous Chemical/Gas',
+  'Lifting by Crane or Hoist',
+  'MCZ',
+  'Moving Machinery',
+  'Odor Generating Activity',
+  'Off Line Fire/Life/Safety System',
+  'Other (See Notes)',
+  'PSM/RMP Work',
+  'Supplied Air Respirator',
+  'X-Ray Radiation or Laser Beam Work'
+]
 
 STATUSES = [
   'Returned',
@@ -78,7 +74,9 @@ STATUSES = [
   'Out for Extension'
 ].freeze
 
-COMPANY_NAMES.each { |company_name| Company.create(name: company_name) }
+BUILDING_NUMBERS.each { |number| Building.create(number:) }
+COMPANY_NAMES.each { |name| Company.create(name:) }
+HAZARD_NAMES.each { |name| Hazard.create(name:) }
 
 20.times do |index|
   WorkPermit.create!(
