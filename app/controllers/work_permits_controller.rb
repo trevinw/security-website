@@ -22,6 +22,7 @@ class WorkPermitsController < ApplicationController
 
   def create
     @work_permit = WorkPermit.new(work_permit_params)
+    @work_permit.user_id = current_user.id if current_user
 
     respond_to do |format|
       if @work_permit.save
@@ -83,6 +84,7 @@ class WorkPermitsController < ApplicationController
                                 .order(:number)
                                 .includes(:buildings)
                                 .includes(:hazards)
+                                .includes(:user)
     else
       # Query to get first Company sorted by name that has >0 Work Permits belonging to it
       # Query used is modified from stackoverflow link below
@@ -93,6 +95,7 @@ class WorkPermitsController < ApplicationController
                                 .order(:number)
                                 .includes(:buildings)
                                 .includes(:hazards)
+                                .includes(:user)
     end
   end
 

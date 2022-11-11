@@ -33,6 +33,12 @@
             <i class="bi bi-trash3"></i>
           <% end %>
         </li>
+
+        <% if current_user.has_any_role?(:admin, :security_lead) %>
+          <li class="nav-item">
+            <p class="nav-link disabled"><%= "Added by: #{work_permit.user.full_name}" %></p>
+          </li>
+        <% end %>
       </ul>
     </div>
 

@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :deliveries
+  has_many :work_permits
 
   devise :ldap_authenticatable
   rolify before_add: :remove_previous_role
@@ -11,6 +12,10 @@ class User < ApplicationRecord
 
   def capital_username
     username.upcase
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 
   def full_name_with_badge

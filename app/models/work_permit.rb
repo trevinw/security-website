@@ -1,5 +1,6 @@
 class WorkPermit < ApplicationRecord
   belongs_to :company
+  belongs_to :user
   has_and_belongs_to_many :buildings
   has_and_belongs_to_many :hazards
 
