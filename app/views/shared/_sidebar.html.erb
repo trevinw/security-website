@@ -23,6 +23,12 @@
               <i class="bi bi-truck"></i>
               Deliveries
             <% end %>
+
+            <%= link_to(badge_path, { class: "list-group-item list-group-item-action #{current_page?(controller: :pages, action: :badge) ? 'active' : ''}" }) do %>
+              <i class="bi bi-person-badge"></i>
+              Badge Picture
+            <% end %>
+
           </ul>
         </div>
       </div>
