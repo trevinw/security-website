@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  resources :deliveries
   root 'pages#home'
 
   resources :companies, only: %i[new create]
+  resources :deliveries
   resources :work_permits
 
   get '/badge', to: 'pages#badge'
