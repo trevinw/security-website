@@ -19,11 +19,11 @@
     <%= form.label :category %>
   </div>
 
-  <div class="row mb-3">
-    <div class="alert alert-primary" role="alert" data-delivery-target="destinationMessage">
-      Select a Destination below, or select Other to type a custom Destination
-    </div>
+  <div class="alert alert-primary" role="alert" data-delivery-target="destinationMessage">
+    Select a Destination below, or select Other to type a custom Destination
+  </div>
 
+  <div class="row mb-3">
     <div class="col-6">
       <div class="form-floating">
         <%= form.select(
@@ -73,11 +73,11 @@
     <%= form.label :chemical_delivery, 'Chemical Delivery?' %>
   </div>
 
+  <div class="alert alert-primary" role="alert" data-delivery-target="chemicalMessage">
+    Select a Chemical below, or select Other to type a custom Chemical
+  </div>
+
   <div class="row mb-3">
-    <div class="alert alert-primary" role="alert" data-delivery-target="chemicalMessage">
-      Select a Chemical below, or select Other to type a custom Chemical
-    </div>
-    
     <div class="col-6">
       <div class="form-floating">
         <%= form.select(
@@ -111,11 +111,11 @@
     </div>
   </div>
 
-  <div class="row mb-3">
-    <div class="alert alert-primary" role="alert" data-delivery-target="contactMessage">
-      Select an SEH Contact below, or select other to type a custom SEH Contact
-    </div>
+  <div class="alert alert-primary" role="alert" data-delivery-target="contactMessage">
+    Select an SEH Contact below, or select other to type a custom SEH Contact
+  </div>
 
+  <div class="row mb-3">
     <div class="col-6">
       <div class="form-floating">
         <%= form.select(
