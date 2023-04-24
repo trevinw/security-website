@@ -23,6 +23,7 @@ ADD . /security-website/
 
 # Set default ENV variables
 ENV RAILS_ENV=production
+ENV TZ="America/Los_Angeles"
 
 EXPOSE 3000
 
