@@ -11,6 +11,7 @@ class Delivery < ApplicationRecord
     'Bulk Argon',
     'Bulk HCL',
     'Bulk Lime',
+    'Bulk NaOH (Caustic)',
     'Bulk Nitric Acid',
     'Bulk Nitrogen',
     'Bulk Nox',
