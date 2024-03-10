@@ -1,7 +1,7 @@
 FROM ruby:3.1.1
 
 # Install NodeJS
-RUN curl -fsSL https://deb.nodesource.com/setup_17.x | bash -
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 RUN apt-get install -y nodejs
 
 # Install Yarn
